@@ -1,20 +1,22 @@
 <script setup>
 import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const user = ref("");
+const router = useRouter();
 
 user.value = localStorage.getItem("userData");
 
 const Logout =()=>{
   localStorage.removeItem("accessToken");
-  navigate("/login")
+  router.push({ path: 'login' })
 }
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">ISSGATE</a>
+      <router-link class="navbar-brand"  to="brands">ISSGATE</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -38,20 +40,7 @@ const Logout =()=>{
               >Brands</router-link
             >
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              en
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">ar</a></li>
-            </ul>
-          </li>
+      
         </ul>
         <form class="d-flex" role="search" v-if="!user">
           <router-link to="login">

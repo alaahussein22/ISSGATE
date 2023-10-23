@@ -49,13 +49,13 @@ export const useBrandsStore = defineStore('BrandsStore', {
 
     updateBrand(id, params) {
       return new Promise((resolve, reject) => {
-        axios.put(`${baseURL}/api/Brand/${id}`, {
+        axios.put(`${baseURL}/api/Brand/${id}`,params, {
               headers: {
                 Authorization: `Bearer ${token}`,
                 token: token,
               },
             },
-            params).then(response => resolve(response))
+            ).then(response => resolve(response))
           .catch(error => reject(error))
       })
     },

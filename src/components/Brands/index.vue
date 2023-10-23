@@ -66,10 +66,29 @@ const activeBrand = (brand) => {
 };
 
 const viewBrand = (brand) => {
-  viewData.value = brand;
-};
+  store
+    .viewBrand(brand.id)
+    .then((res) => {
+      if (res) {
+        viewData.value=res.data.data
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });};
+
+
 const updateBrand = (brand) => {
-  updateData.value = brand;
+  store
+    .viewBrand(brand.id)
+    .then((res) => {
+      if (res) {
+        updateData.value=res.data.data
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 };
 
 watchEffect(getAllBrands);
@@ -97,7 +116,7 @@ watchEffect(getAllBrands);
       <div class="toast-body">Brand Deleted Successfully</div>
     </div>
 
-    <router-link to="/add">
+    <router-link to="add">
       <button class="btn add" type="button">
         <i class="fa-solid fa-plus me-2"></i>Add New Brand
       </button>
@@ -128,6 +147,7 @@ watchEffect(getAllBrands);
                 type="button"
                 class="btn btn-outline-success"
                 @click="updateBrand(brand)"
+                data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
               >
                 Edit
               </button>
@@ -162,7 +182,7 @@ watchEffect(getAllBrands);
     </table>
 
     <ViewBrand :viewData="viewData" />
-    <UpdateBrand :updateData="updateData" />
+    <UpdateBrand :updateData="updateData" :getAllBrands="getAllBrands"/>
   </div>
 </template>
 

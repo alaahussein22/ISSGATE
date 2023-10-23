@@ -38,9 +38,7 @@ const props = defineProps({
             <li class="list-group-item">
               <strong>ID:</strong> {{ props.viewData.id }}
             </li>
-            <li class="list-group-item">
-              <strong>Name:</strong> {{ props.viewData.name }}
-            </li>
+
             <li class="list-group-item">
               <strong>createdAt:</strong> {{ props.viewData.createdAt }}
             </li>
@@ -48,6 +46,43 @@ const props = defineProps({
               <strong>isActive:</strong> {{ props.viewData.isActive }}
             </li>
           </ul>
+          <h6>Name By Langs</h6>
+          <table class="table" v-if="props.viewData.nameByLang">
+            <thead>
+              <tr>
+                <th scope="col">LangID</th>
+                <th scope="col">Name</th>
+              </tr>
+            </thead>
+            <tbody
+              class="table"
+              v-for="brand in props.viewData.nameByLang"
+              :key="brand.id"
+            >
+              <tr>
+                <th>{{ brand.langId }}</th>
+                <td>
+                  {{ brand.value }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table" v-else>
+            <thead>
+              <tr>
+                <th scope="col">LangID</th>
+                <th scope="col">Name</th>
+              </tr>
+            </thead>
+            <tbody
+              class="table"
+             
+            >
+              <tr>
+               Not Found
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -64,5 +99,11 @@ img {
   justify-content: center;
   margin: 1rem 7rem;
   width: 50%;
+}
+
+h6 {
+  margin: 1rem;
+  color: #f4ce14;
+  font-weight: 500;
 }
 </style>
